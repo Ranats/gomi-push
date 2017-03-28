@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  every: false
+  fortnightly: false
+  start_date: 1
+  mon: false
+  tues: false
+  wed: false
+  thurs: false
+  fri: false
+  sat: false
+  sun: false
+
+two:
+  name: MyString
+  every: false
+  fortnightly: false
+  start_date: 1
+  mon: false
+  tues: false
+  wed: false
+  thurs: false
+  fri: false
+  sat: false
+  sun: false
