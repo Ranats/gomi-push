@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
-  root 'gomi#index'
-#  get 'gomi/index'
+#  root 'gomi#index'
+  root 'gomi#top'
+
+  patch 'gomi/create' => 'gomi#create'
+
+  get 'gomi/index'
   get 'gomi/show'
+  get 'gomi/create'
   post "create" => "gomi#create"
 
   post "users" => "gomi#create"
