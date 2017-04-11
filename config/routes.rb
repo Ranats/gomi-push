@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'gomi/index'
+  root 'gomi#index'
+#  get 'gomi/index'
   get 'gomi/show'
-  post "gomi/create" => "gomi#create"
+  post "create" => "gomi#create"
 
   post "users" => "gomi#create"
   # The priority is based upon order of creation: first created -> highest priority.
