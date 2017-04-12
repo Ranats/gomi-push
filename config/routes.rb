@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'gomi/index'
   get 'gomi/show'
   get 'gomi/create'
-  post "create" => "gomi#create"
+  post "create" => "user#create"
   post "login"  => "user#login"
 
   post "user/create" => "user#create"

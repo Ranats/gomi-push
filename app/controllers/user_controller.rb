@@ -6,7 +6,9 @@ class UserController < ApplicationController
 #    @gomi.every = params[:gomi][:every]
 #    @gomi.save
 #    redirect_to '/gomi/show'
-    @user = User.create(params[:session][:name])
+    @user = User.create(name:params[:user][:name])
+    flash[:notice] = "登録しました"
+    session[:id] = @user.id
     redirect_to gomi_index_path
   end
 
@@ -15,10 +17,15 @@ class UserController < ApplicationController
   end
 
   def login
+    if params[:regist] == "登録"
+      create and return
+    end
+
     name = params[:user][:name]
     @user = User.find_by(name:name)
     if @user
       # login
+      session[:id] = @user.id
       redirect_to gomi_index_path
     else
       # error
@@ -26,10 +33,6 @@ class UserController < ApplicationController
       @user = User.new
       redirect_to user_root_path
     end
-  end
-
-  def new
-    # code here
   end
 
 end

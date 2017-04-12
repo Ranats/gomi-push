@@ -10,7 +10,8 @@
     <%= f.text_field :name %>
 
     <%= f.submit "ログイン" %>
-    <%= link_to (button_tag "登録", type: 'button'), { action: :create } %>
+
+    <%= submit_tag "登録" , name: "regist" %>
 
 <% end %>
 

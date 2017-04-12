@@ -9,41 +9,24 @@ class GomiController < ApplicationController
   end
 
   def current_user
-    @current_user ||= User.find_by(id:session[:id])
+    @current_user ||= User.find_by(id: session[:id])
   end
 
   helper_method :current_user
 
   def top
-#    @user = User.new(name:"test")
-    @user = User.find_by(id:1)
-    if @user.nil?
-      puts "nil"
-      @user = User.new(name:"test")
-      @user.save
-    end
-
-    p @user
-
     puts "user---"
     p @user
     session[:id] = @user.id
   end
 
   def index
-    puts "user---"
-    p @user
     @user = current_user
-    puts "user---"
-    p @user
-#    @user.name = "test"
-#    @user = current_user
-   @user.gomis.build
-    p @user.gomis
+    @user.gomis.build
+#    p @user.gomis
   end
 
   def show
-#    @gomi = Gomi.all
     @gomi = Gomi.where(user_id: current_user.id)
     puts "class"
     p @gomi
@@ -57,15 +40,15 @@ class GomiController < ApplicationController
   def create
     puts "params:"
 
+    # Todo
+    # 一旦全部削除する？
+    # or 上からID振ってID順に||=で更新とか
+
     data = ActionController::Parameters.new(params[:user][:gomis_attributes])
-    #p params[:user][:gomis_attributes]
 
-    p data
+    keys = [:mon, :tues, :wed, :thurs, :fri, :sat, :sun]
 
-    keys = [:mon,:tues,:wed,:thurs,:fri,:sat,:sun]
-
-    data.each do |id,gomi|
-      p gomi
+    data.each do |id, gomi|
       @gomi = Gomi.new
       @gomi.user_id = current_user.id
 
@@ -88,12 +71,7 @@ class GomiController < ApplicationController
       @gomi.save
     end
 
-    #    gomis = params[:user][:gomis_attributes]
-    #    gomis.each do |gomi|
-    #      p gomi[:name]
-    #    end
-
-    redirect_to '/gomi/show'
+    redirect_to gomi_index_path
   end
 
 end
