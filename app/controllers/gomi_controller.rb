@@ -81,11 +81,11 @@ class GomiController < ApplicationController
 #      @gomi.every = (gomi[:every] == 1) ? true : false
       @gomi.every = gomi[:every]
 
-      if gomi[:every] == 1
+#      if gomi[:every] == 1
         # どうにかして
         # その日が来たらチェックして更新して…
         @gomi.start_date = gomi[:start_date]
-      end
+#      end
 
       keys.each do |key|
 #        @gomi[key] = check(gomi[key])
