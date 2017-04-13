@@ -4,7 +4,7 @@ class GomiController < ApplicationController
 
   def gomi_params
     params.require(:gomi).permit(
-        gomis_attributes: [:id, :_destroy]
+        gomis_attributes: [:id, :name, :_destroy]
     )
   end
 
@@ -22,8 +22,16 @@ class GomiController < ApplicationController
 
   def index
     @user = current_user
-    @user.gomis.build
-#    p @user.gomis
+#    @user.gomis.build
+    puts "gomis-----"
+    @user.gomis.each do |gomi|
+      p gomi
+    end
+
+    puts "gomi itirann-----"
+    Gomi.all.each do |gomi|
+      p gomi
+    end
   end
 
   def show
@@ -38,6 +46,11 @@ class GomiController < ApplicationController
   end
 
   def create
+
+#    raise ActiveRecord::Rollback
+
+    Gomi.delete_all(:user_id => current_user.id)
+
     puts "params:"
 
     # Todo
@@ -46,9 +59,20 @@ class GomiController < ApplicationController
 
     data = ActionController::Parameters.new(params[:user][:gomis_attributes])
 
+
+    puts "data------"
+    data.each do |d|
+      p d
+    end
+
+    puts "data------"
+
     keys = [:mon, :tues, :wed, :thurs, :fri, :sat, :sun]
 
     data.each do |id, gomi|
+      if gomi[:_destroy]
+        next
+      end
       @gomi = Gomi.new
       @gomi.user_id = current_user.id
 
@@ -68,7 +92,9 @@ class GomiController < ApplicationController
         @gomi[key] = gomi[key]
       end
 
-      @gomi.save
+      unless @gomi.save
+        flash[:alert] = @gomi.errors.full_messages
+      end
     end
 
     redirect_to gomi_index_path

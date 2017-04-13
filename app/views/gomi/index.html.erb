@@ -2,6 +2,7 @@
 <h1>Gomi#index</h1>
 
 <p><font color="green"><%= flash[:notice] %></font></p>
+<p><font color="red"><%= flash[:alert] %></font></p>
 
 <% label = ["ゴミ名","毎週","隔週","開始日"] + "月火水木金土日".split("") %>
 
@@ -18,7 +19,7 @@
 
       <%= f.nested_fields_for :gomis, wrapper_tag: :tr do |q| %>
           <td><%= q.text_field :name %></td>
-          <td><%= q.radio_button :every,"1" %></td>
+          <td><%= q.radio_button :every,"1", :checked => true %></td>
           <td><%= q.radio_button :every,"2" %></td>
           <td><%= q.text_field :start_date %></td>
           <td><%= q.check_box :mon %></td>

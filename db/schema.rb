@@ -15,18 +15,17 @@ ActiveRecord::Schema.define(version: 20170411110000) do
 
   create_table "gomis", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "every"
-    t.boolean  "fortnightly"
-    t.integer  "start_date"
-    t.boolean  "mon"
-    t.boolean  "tues"
-    t.boolean  "wed"
-    t.boolean  "thurs"
-    t.boolean  "fri"
-    t.boolean  "sat"
-    t.boolean  "sun"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "every"
+    t.string   "start_date"
+    t.integer  "mon"
+    t.integer  "tues"
+    t.integer  "wed"
+    t.integer  "thurs"
+    t.integer  "fri"
+    t.integer  "sat"
+    t.integer  "sun"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
   end
 
