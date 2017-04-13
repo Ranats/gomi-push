@@ -20,4 +20,8 @@ class Gomi < ActiveRecord::Base
     end
   end
 
+  def push
+    p "push!!!!!!!!!!!!!!!!!!!!!!!!"
+  end
+
 end
