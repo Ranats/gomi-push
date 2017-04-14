@@ -46,5 +46,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 gem 'washbullet'
-gem 'dotenv'
+gem 'dotenv-rails'
 gem 'whenever', require: false

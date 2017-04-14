@@ -1,7 +1,10 @@
 require 'washbullet'
-require 'dotenv'
+#require 'dotenv-rails'
 
-Dotenv.load ".env"
+
+#Dotenv.load ".env"
+
+p ENV['TOKEN']
 
 client = Washbullet::Client.new(ENV['TOKEN'])
 
