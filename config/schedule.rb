@@ -45,10 +45,17 @@ every 1.day, :at => '6:00 am' do
   # MyModel モデルの task_to_run_at_four_thirty_in_the_morning クラスメソッドを実行
 #  runner "MyModel.task_to_run_at_four_thirty_in_the_morning"
 
-  script '/home/coda/RubymineProjects/gomi-push/app/controllers/concerns/pushbullet_test.rb'
-  script '/home/coda/RubymineProjects/gomi-push/app/controllers/concerns/pushbullet_test.rb'
-  
-  runner "gomi.push"
+#  runner "gomi.push"
+
+#  script '/home/coda/RubymineProjects/gomi-push/app/controllers/concerns/pushbullet_test.rb'
+#  script '/home/coda/RubymineProjects/gomi-push/app/controllers/concerns/pushbullet_test.rb'
+
+#  runner "gomi.push"
+end
+
+every 1.minute do
+#  runner "gomi.push"
+#  rake "gomi:push"
 end
 
 =begin
