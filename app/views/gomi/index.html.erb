@@ -1,8 +1,6 @@
 
 <h1>Gomi#index</h1>
 
-<p><font color="green"><%= flash[:notice] %></font></p>
-<p><font color="red"><%= flash[:alert] %></font></p>
 
 <% label = ["ゴミ名","毎週","隔週","開始日"] + "月火水木金土日".split("") %>
 
@@ -11,6 +9,11 @@
 
     <table>
       <tbody>
+
+      <tr>
+        <th>通知時間：<%= f.time_select("pushtime_h",:default=> {hour:"06",minute:"00"}) %></th>
+      </tr>
+
       <tr>
         <% label.each do |lb| %>
             <th><%= lb %></th>
