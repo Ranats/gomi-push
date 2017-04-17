@@ -25,6 +25,7 @@
 set :output, 'log/crontab.log'
 # production 環境で cron 実行
 #set :environment, :production
+set :environment, :development
 
 =begin
 
@@ -55,7 +56,7 @@ end
 
 every 1.minute do
 #  runner "gomi.push"
-#  rake "gomi:push"
+  rake "gomi:push"
 end
 
 =begin

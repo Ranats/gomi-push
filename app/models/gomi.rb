@@ -20,9 +20,4 @@ class Gomi < ActiveRecord::Base
     end
   end
 
-  def push
-    p "push!!!!!!!!!!!!!!!!!!!!!!!!"
-    Rails.logger.info "push!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  end
-
 end

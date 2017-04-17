@@ -48,3 +48,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'washbullet'
 gem 'dotenv-rails'
 gem 'whenever', require: false
+
+# バルクインサート
+gem 'activerecord-import'
+
+# Twitter-bootstrap
+#gem 'therubyracer'
+gem 'twitter-bootstrap-rails'
+gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
+#, :git => 'git@github.com:metaskills/less-rails.git', :branch => 'rails5'
+
+gem 'sprockets' , '3.6.3'
