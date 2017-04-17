@@ -22,16 +22,8 @@ class GomiController < ApplicationController
 
   def index
     @user = current_user
-#    @user.gomis.build
-    puts "gomis-----"
-    @user.gomis.each do |gomi|
-      p gomi
-    end
+    p @user
 
-    puts "gomi itirann-----"
-    Gomi.all.each do |gomi|
-      p gomi
-    end
   end
 
   def show
@@ -47,18 +39,18 @@ class GomiController < ApplicationController
 
   def create
 
-#    raise ActiveRecord::Rollback
+    @user = current_user
+    @user.pushtime_h = params[:user]["pushtime_h(4i)"].to_i
+    @user.pushtime_m = params[:user]["pushtime_h(5i)"].to_i
+    @user.save
+
+    flash[:notice] = nil
 
     Gomi.delete_all(:user_id => current_user.id)
 
     puts "params:"
 
-    # Todo
-    # 一旦全部削除する？
-    # or 上からID振ってID順に||=で更新とか
-
     data = ActionController::Parameters.new(params[:user][:gomis_attributes])
-
 
     puts "data------"
     data.each do |d|
@@ -68,6 +60,8 @@ class GomiController < ApplicationController
     puts "data------"
 
     keys = [:mon, :tues, :wed, :thurs, :fri, :sat, :sun]
+
+#    gomis = []
 
     data.each do |id, gomi|
       if gomi[:_destroy]
@@ -92,10 +86,56 @@ class GomiController < ApplicationController
         @gomi[key] = gomi[key]
       end
 
+#      gomis << @gomi
+
       unless @gomi.save
+        puts "失敗〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜"
         flash[:alert] = @gomi.errors.full_messages
+       # 登録失敗時に入力データを保持する
+        puts "gomi"
+        p gomi
+        @user.gomis.build(gomi)
+#        @user.save
+
+        flash[:notice] = nil
+        render action: 'index' and return
+
+#        @user = User.new(params[:user][:gomis_attributes])
+#        attr = params.require(:user).permit(:name)
+#        @gomi = Gomi.new(params.require(:user).permit(:name))
+#        @gomi.save
+      else
+        puts "更新〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜"
+        flash[:notice] = "更新しました"
       end
+
     end
+
+=begin
+    result = Gomi.import gomis
+
+    puts "result"
+    p result
+    p result[:failed_instances]
+    if result[:failed_instances].blank?
+      # 成功
+      flash[:notice] = "更新しました"
+    else
+      # 失敗
+      res = result[:failed_instances].first
+      puts "res"
+      attr = res[:name]
+#      attr = Hash[]
+      p attr
+      @user = current_user
+#      result[:failed_instances].each do |attr|
+#        @user = User.new({name:attr})
+      p @user
+      render action: 'index' and return
+#      end
+      end
+=end
+
 
     redirect_to gomi_index_path
   end
