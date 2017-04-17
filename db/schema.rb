@@ -31,10 +31,9 @@ ActiveRecord::Schema.define(version: 20170411110000) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.integer  "pushtime_h"
-    t.integer  "pushtime_m"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.time     "pushtime",   default: '2000-01-01 06:00:00'
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
 end

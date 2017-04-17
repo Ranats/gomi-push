@@ -22,8 +22,6 @@ class GomiController < ApplicationController
 
   def index
     @user = current_user
-    p @user
-
   end
 
   def show
@@ -40,8 +38,11 @@ class GomiController < ApplicationController
   def create
 
     @user = current_user
-    @user.pushtime_h = params[:user]["pushtime_h(4i)"].to_i
-    @user.pushtime_m = params[:user]["pushtime_h(5i)"].to_i
+    hour = params[:user]["pushtime(4i)"].to_i
+    min = params[:user]["pushtime(5i)"].to_i
+
+    t = Time.local(2017,3,27,hour,min,0)
+    @user.pushtime = t.to_s(:db)
     @user.save
 
     flash[:notice] = nil

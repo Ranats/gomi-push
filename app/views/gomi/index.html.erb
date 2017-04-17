@@ -11,7 +11,7 @@
       <tbody>
 
       <tr>
-        <th>通知時間：<%= f.time_select("pushtime_h",:default=> {hour:"06",minute:"00"}) %></th>
+        <th>通知時間：<%= f.time_select("pushtime",:default=> {hour:@user.pushtime.hour,minute:@user.pushtime.min}) %></th>
       </tr>
 
       <tr>
