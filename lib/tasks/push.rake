@@ -58,10 +58,13 @@ namespace :gomi do
   task :push => :environment do
 #    def push
 #      p "push!!!!!!!!!!!!!!!!!!!!!!!!"
-      Rails.logger.info "push!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-# end
+# => development.log / production.log
+    Rails.logger.info "push!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    # => crontab.log
+    puts Time.now
+    # end
 
-#    Dotenv.load ".env"
+    #    Dotenv.load ".env"
 =begin
     client = Washbullet::Client.new(ENV['TOKEN'])
 
@@ -82,24 +85,20 @@ namespace :gomi do
     #Rails.logger.info @user
 
     users.each do |user|
+      id = user.id
       hour = user.pushtime.hour
       min = user.pushtime.min
 
       Rails.logger.info hour
       Rails.logger.info min
-
-      id = user.id
-      gomis = Gomi.find_by(user_id:id)
-
       # 時間
       if hour == Time.now.hour && min == Time.now.min
         client = Washbullet::Client.new(ENV['TOKEN'])
 
-        gomis.each do |gomi|
-
+        Gomi.where(user_id: id).find_each do |gomi|
           # 曜日判定
           if wday?(gomi)
-            client.push_note(receiver: :device, identifier:ENV['DEVICE'], params:{
+            client.push_note(receiver: :device, identifier: ENV['DEVICE'], params: {
                 title: '今日のゴミ',
                 body: gomi.name
             })
@@ -107,8 +106,6 @@ namespace :gomi do
         end
       end
     end
-
-
 
 
 #    @user.each do |user|
