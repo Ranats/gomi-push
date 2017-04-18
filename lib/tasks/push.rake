@@ -3,6 +3,14 @@
 require 'washbullet'
 require 'dotenv'
 
+$week = {0 => :sunday,
+         1 => :monday,
+         2 => :tuesday,
+         3 => :wednesday,
+         4 => :thursday,
+         5 => :friday,
+         6 => :saturday}
+
 def oauth
 
 end
@@ -52,6 +60,13 @@ def wday?(gomi)
 
 end
 
+def push(gomi)
+  $client.push_note(receiver: :device, identifier: ENV['DEVICE'], params: {
+      title: '今日のゴミ',
+      body: gomi.name
+  })
+end
+
 namespace :gomi do
   desc "pushする"
 
@@ -62,28 +77,8 @@ namespace :gomi do
     Rails.logger.info "push!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     # => crontab.log
     puts Time.now
-    # end
-    #    Dotenv.load ".env"
-=begin
-    client = Washbullet::Client.new(ENV['TOKEN'])
 
-    puts "api key====="
-    p ENV['TOKEN']
-
-    puts "client------"
-    p client
-
-    client.push_note(receiver: :device, identifier:ENV['DEVICE'], params:{
-        title: '朝やで',
-        body: '朝'
-    })
-=end
-
-    users = User.all
-    puts "user~~~~~~~~~~~~~~~~~~~~~~"
-    #Rails.logger.info @user
-
-    users.each do |user|
+    User.all.each do |user|
       id = user.id
       hour = user.pushtime.hour
       min = user.pushtime.min
@@ -92,25 +87,31 @@ namespace :gomi do
       Rails.logger.info min
       # 時間
       if hour == Time.now.hour && min == Time.now.min
-        client = Washbullet::Client.new(ENV['TOKEN'])
+        $client = Washbullet::Client.new(ENV['TOKEN'])
 
         Gomi.where(user_id: id).find_each do |gomi|
-          # 曜日判定
-          if wday?(gomi)
-            client.push_note(receiver: :device, identifier: ENV['DEVICE'], params: {
-                title: '今日のゴミ',
-                body: gomi.name
-            })
+          # 隔週
+          if gomi.every == 2
+            if gomi.start_date.to_i == Date.today.day
+              push(gomi)
+              gomi.start_date = -7.days.ago.next_week($week[Date.today.wday]).day
+              gomi.save
+            end
+          else
+            # 曜日判定
+            if wday?(gomi)
+              push(gomi)
+            end
           end
         end
       end
     end
+  end
 
-
-#    @user.each do |user|
-#      Rails.logger.info user
-#      p user
-#    end
+  task :test do
+    p $week[Date.today.wday]
+    p -7.days.ago.next_week($week[Date.today.wday]).day
+    p Date.today.next_week.next_week($week[Date.today.wday])
   end
 
 end
