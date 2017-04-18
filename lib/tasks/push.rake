@@ -63,7 +63,6 @@ namespace :gomi do
     # => crontab.log
     puts Time.now
     # end
-
     #    Dotenv.load ".env"
 =begin
     client = Washbullet::Client.new(ENV['TOKEN'])
