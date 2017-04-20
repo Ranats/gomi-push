@@ -62,7 +62,7 @@ end
 
 def push(gomi)
   $client.push_note(receiver: :device, identifier: ENV['DEVICE'], params: {
-      title: '今日のゴミ',
+      title: $title,
       body: gomi.name
   })
 end
@@ -82,6 +82,8 @@ namespace :gomi do
       id = user.id
       hour = user.pushtime.hour
       min = user.pushtime.min
+
+      $title = user.title
 
       Rails.logger.info hour
       Rails.logger.info min
