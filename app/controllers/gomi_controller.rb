@@ -43,6 +43,7 @@ class GomiController < ApplicationController
 
     t = Time.local(2017,3,27,hour,min,0)
     @user.pushtime = t.to_s(:db)
+    @user.title = params[:title]
     @user.save
 
     flash[:notice] = nil

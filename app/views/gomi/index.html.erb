@@ -13,6 +13,7 @@
 
       <tr>
         <th>通知時間：<%= f.time_select("pushtime",:default=> {hour:@user.pushtime.hour,minute:@user.pushtime.min}) %></th>
+        <th>タイトル：<%= f.text_field :title %></th>
       </tr>
 
       <tr>
