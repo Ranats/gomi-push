@@ -62,3 +62,5 @@ gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 #, :git => 'git@github.com:metaskills/less-rails.git', :branch => 'rails5'
 
 gem 'sprockets' , '3.6.3'
+
+gem 'rails_12factor', group: :production
