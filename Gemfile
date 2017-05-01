@@ -3,10 +3,13 @@ source 'https://rubygems.org'
 gem 'nested_form_fields'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.2'
+gem 'rails', '5.0.1'#, '4.2.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', groups: %w(test development), require: false
 #gem 'ibm_db'
+#gem 'pg', groups: %w(production), require: false
+
+gem 'dotenv-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -15,7 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
- gem 'therubyracer', platforms: :ruby
+#gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', git: 'https://github.com/cowboyd/therubyracer.git'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -61,3 +65,7 @@ gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 #, :git => 'git@github.com:metaskills/less-rails.git', :branch => 'rails5'
 
 gem 'sprockets' , '3.6.3'
+
+#gem 'rails_12factor', group: :production
+
+gem 'passenger'

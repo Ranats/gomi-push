@@ -27,5 +27,7 @@ module GomiPush
     # => permitメソッドを通さず，すべてのsubmitデータを利用する
     config.action_controller.permit_all_parameters = true
 
+    config.assets.precompile += %w(*.eot *.svg *.ttf *.woff)
+
   end
 end
