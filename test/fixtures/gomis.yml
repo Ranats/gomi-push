@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  every: 1
+  start_date: MyString
+  mon: 1
+  tues: 1
+  wed: 1
+  thurs: 1
+  fri: 1
+  sat: 1
+  sun: 1
+  user_id: 1
+
+two:
+  name: MyString
+  every: 1
+  start_date: MyString
+  mon: 1
+  tues: 1
+  wed: 1
+  thurs: 1
+  fri: 1
+  sat: 1
+  sun: 1
+  user_id: 1

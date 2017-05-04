@@ -1,0 +1,61 @@
+<%= form_for(@gomi) do |f| %>
+  <% if @gomi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gomi.errors.count, "error") %> prohibited this gomi from being saved:</h2>
+
+      <ul>
+      <% @gomi.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :every %><br>
+    <%= f.number_field :every %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.text_field :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :mon %><br>
+    <%= f.number_field :mon %>
+  </div>
+  <div class="field">
+    <%= f.label :tues %><br>
+    <%= f.number_field :tues %>
+  </div>
+  <div class="field">
+    <%= f.label :wed %><br>
+    <%= f.number_field :wed %>
+  </div>
+  <div class="field">
+    <%= f.label :thurs %><br>
+    <%= f.number_field :thurs %>
+  </div>
+  <div class="field">
+    <%= f.label :fri %><br>
+    <%= f.number_field :fri %>
+  </div>
+  <div class="field">
+    <%= f.label :sat %><br>
+    <%= f.number_field :sat %>
+  </div>
+  <div class="field">
+    <%= f.label :sun %><br>
+    <%= f.number_field :sun %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

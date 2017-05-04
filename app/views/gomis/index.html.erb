@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Gomis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Every</th>
+      <th>Start date</th>
+      <th>Mon</th>
+      <th>Tues</th>
+      <th>Wed</th>
+      <th>Thurs</th>
+      <th>Fri</th>
+      <th>Sat</th>
+      <th>Sun</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gomis.each do |gomi| %>
+      <tr>
+        <td><%= gomi.name %></td>
+        <td><%= gomi.every %></td>
+        <td><%= gomi.start_date %></td>
+        <td><%= gomi.mon %></td>
+        <td><%= gomi.tues %></td>
+        <td><%= gomi.wed %></td>
+        <td><%= gomi.thurs %></td>
+        <td><%= gomi.fri %></td>
+        <td><%= gomi.sat %></td>
+        <td><%= gomi.sun %></td>
+        <td><%= gomi.user_id %></td>
+        <td><%= link_to 'Show', gomi %></td>
+        <td><%= link_to 'Edit', edit_gomi_path(gomi) %></td>
+        <td><%= link_to 'Destroy', gomi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gomi', new_gomi_path %>
