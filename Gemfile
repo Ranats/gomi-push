@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
-gem 'mysql2'
+gem 'sqlite3'
+#gem 'mysql2'
 
 group :production do
   gem 'ibm_db'
@@ -53,7 +53,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'less-rails'
+#gem 'less-rails'
 #gem 'therubyracer'
-gem 'execjs'
-gem 'twitter-bootstrap-rails'
+#gem 'execjs'
+#gem 'twitter-bootstrap-rails'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+
+gem 'nested_form_fields'
