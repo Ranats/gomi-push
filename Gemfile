@@ -61,3 +61,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'nested_form_fields'
+
+gem 'washbullet'
+gem 'dotenv-rails'
+gem 'whenever', require: false
+
+# バルクインサート
+#gem 'activerecord-import'
+
+#gem 'sprockets' , '3.6.3'
+
+#gem 'passenger'

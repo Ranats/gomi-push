@@ -4,6 +4,31 @@ Rails.application.routes.draw do
 
   root :to => 'users#index'
 
+=begin
+#  root 'gomi#index'
+#  root 'gomi#top'
+
+  constraints -> request { request.session[:user_id].present? } do
+    # ログインしているとき
+    root to: 'gomi#index', as: :user_root
+  end
+  # ログインしていないとき
+  root to: 'user#top'
+
+  patch 'gomi/create' => 'gomi#create'
+
+  get 'gomi/index'
+  get 'gomi/show'
+  get 'gomi/create'
+  post "create" => "user#create"
+  post "login"  => "user#login"
+
+  post "user/create" => "user#create"
+
+#  post "users" => "gomi#create"
+
+=end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

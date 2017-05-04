@@ -1,0 +1,17 @@
+
+<h1>Gomi</h1>
+
+<%= @user %>
+
+<%= link_to "index", gomi_index_path %>
+
+<p><font color="red"><%= flash[:alert] %></font></p>
+<%= form_for @user, :url => :login do |f| %>
+    <%= f.text_field :name %>
+
+    <%= f.submit "ログイン" %>
+
+    <%= submit_tag "登録" , name: "regist" %>
+
+<% end %>
+

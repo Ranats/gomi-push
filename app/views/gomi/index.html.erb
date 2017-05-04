@@ -1,0 +1,47 @@
+
+<h1>Gomi#index</h1>
+
+<%= bootstrap_flash %>
+
+<% label = ["ゴミ名","毎週","隔週","開始日"] + "月火水木金土日".split("") %>
+
+
+<%= form_for(@user, :url => 'create' , html:{class:'form-horizontal'}) do |f| %>
+
+    <table>
+      <tbody>
+
+      <tr>
+        <th>通知時間：<%= f.time_select("pushtime",:default=> {hour:@user.pushtime.hour,minute:@user.pushtime.min}) %></th>
+        <th>タイトル：<%= f.text_field :title %></th>
+      </tr>
+
+      <tr>
+        <% label.each do |lb| %>
+            <th><%= lb %></th>
+        <% end %>
+      </tr>
+
+      <%= f.nested_fields_for :gomis, wrapper_tag: :tr do |q| %>
+          <td><%= q.text_field :name %></td>
+          <td><%= q.radio_button :every,"1", :checked => true %></td>
+          <td><%= q.radio_button :every,"2" %></td>
+          <td><%= q.text_field :start_date %></td>
+          <td><%= q.check_box :mon %></td>
+          <td><%= q.check_box :tues %></td>
+          <td><%= q.check_box :wed %></td>
+          <td><%= q.check_box :thurs%></td>
+          <td><%= q.check_box :fri %></td>
+          <td><%= q.check_box :sat %></td>
+          <td><%= q.check_box :sun %></td>
+          <td><%= q.remove_nested_fields_link 'Delete', role: 'button' %></td>
+
+      <% end %>
+      </tbody>
+    </table>
+    <%= f.hidden_field :user_id, value:current_user.id %>
+    <%= f.add_nested_fields_link :gomis, 'Add new', role: 'button' %>
+
+    <%= f.submit %>
+
+<% end %>
