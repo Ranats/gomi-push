@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 #gem 'therubyracer', platforms: :ruby
-gem 'therubyracer', git: 'https://github.com/cowboyd/therubyracer.git'
+#gem 'therubyracer', git: 'https://github.com/cowboyd/therubyracer.git'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -61,7 +61,7 @@ gem 'activerecord-import'
 # Twitter-bootstrap
 #gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
-gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
+#gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 #, :git => 'git@github.com:metaskills/less-rails.git', :branch => 'rails5'
 
 gem 'sprockets' , '3.6.3'
