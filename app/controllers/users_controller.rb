@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @user = User.new
   end
 
   # GET /users/1
@@ -56,6 +57,32 @@ class UsersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def login
+    if params[:regist] == "登録"
+      if User.find_by(name:params[:user][:name])
+        flash[:alert] = "既に登録されているユーザー名です"
+        @user = User.new
+        puts "error"
+        redirect_to users_path and return
+      end
+      create and return
+    end
+
+    puts "no regist"
+    name = params[:user][:name]
+    @user = User.find_by(name:name)
+    if @user
+      # login
+      session[:id] = @user.id
+      redirect_to gomis_path and return
+    else
+      # error
+      flash[:alert] = "ユーザーが見つかりません"
+      @user = User.new
+      redirect_to users_path and return
     end
   end
 

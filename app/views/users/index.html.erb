@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Users</h1>
+<h1>Gomi</h1>
 
+<!--
 <table>
   <thead>
     <tr>
@@ -25,6 +26,18 @@
     <% end %>
   </tbody>
 </table>
+
+-->
+
+<p><font color="red"><%= flash[:alert] %></font></p>
+<%= form_for @user, :url => :login do |f| %>
+    <%= f.text_field :name %>
+
+    <%= f.submit "ログイン" %>
+
+    <%= submit_tag "登録" , name: "regist" %>
+
+<% end %>
 
 <br>
 
