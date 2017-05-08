@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root :to => 'users#index'
 
   post "login"  => "users#login"
+  patch "login" => "users#login"
+
 
 =begin
 #  root 'gomi#index'

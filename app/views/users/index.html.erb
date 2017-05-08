@@ -2,9 +2,19 @@
 
 <h1>Gomi</h1>
 
+<% if @errors.any? %>
+    <div id="error_explanation">
+
+      <% @errors.each do |message| %>
+          ・<%= message %>
+          <br>
+      <% end %>
+    </div>
+<% end %>
 <p><font color="red"><%= flash[:alert] %></font></p>
 <%= form_for @user, :url => :login do |f| %>
     <%= f.text_field :name %>
+    <%= f.text_field :password %>
 
     <%= f.submit "ログイン" %>
 

@@ -4,8 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+
+    p @errors
     @users = User.all
     @user = User.new
+    @errors = []
   end
 
   # GET /users/1
@@ -29,8 +32,8 @@ class UsersController < ApplicationController
 
     if User.all.size > 50
       respond_to do |format|
-      format.html { redirect_to users_path, flash[:alert] = "いっぱい(っ◞‸◟c)いっぱい" }
-      format.json { head :no_content }
+        format.html { redirect_to users_path, flash[:alert] = "いっぱい(っ◞‸◟c)いっぱい" }
+        format.json { head :no_content }
       end
     else
 
@@ -41,16 +44,21 @@ class UsersController < ApplicationController
 #        redirect_to users_path and return
 #      end
 
-      respond_to do |format|
+#      respond_to do |format|
       if @user.save
-        format.html { redirect_to users_path, notice: 'User was successfully created.' }
-        format.json { render :login, status: :created, location: @user }
+        flash[:notice] = 'User was successfully created.'
+#        format.html { render :new, notice: 'User was successfully created.' }
+#        format.json { render :login, status: :created, location: @user }
+        redirect_to root_path
       else
+        puts "errrrrrrrrrrrrrrrrrrrrr"
         p @user.errors.full_messages
-        format.html { redirect_to users_path flash[:alert] = @user.errors.full_messages}
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        flash[:alert] = @user.errors.full_messages
+        render :new
+#        format.html { render :new}
+#        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-      end
+#      end
 
     end
   end
@@ -71,21 +79,46 @@ class UsersController < ApplicationController
 
   def login
     if params[:regist] == "登録"
-      create and return
+      redirect_to new_user_path and return
     end
 
-    puts "no regist"
     name = params[:user][:name]
-    @user = User.find_by(name:name)
+    password = params[:user][:password]
+
+    puts "name==="
+    p password
+
+    @errors = []
+    @user = User.new
+
+    if name.blank?
+      @errors << "ユーザー名を入力してください．"
+      render :index and return
+    end
+
+    @user = User.find_by(name:params[:user][:name])
+
     if @user
-      # login
-      session[:id] = @user.id
-      redirect_to gomis_path and return
+      if password.blank?
+        @errors << "パスワードを入力してください．"
+        render :index and return
+      end
+      if @user.authenticate(params[:user][:password])
+        # login
+        session[:id] = @user.id
+        redirect_to gomis_path and return
+      else
+        puts "間違いt"
+        @errors << "パスワードが間違っています"
+        render :index and return
+      end
     else
-      # error
-      flash[:alert] = "ユーザーが見つかりません"
       @user = User.new
-      redirect_to users_path and return
+      # error
+      @errors <<  "ユーザーが見つかりません"
+      puts "error"
+      p @errors
+      render :index and return
     end
   end
 
@@ -100,13 +133,13 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :pushtime, :title)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:name, :pushtime, :title, :password, :password_confirmation)
+  end
 end

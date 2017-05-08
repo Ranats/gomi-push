@@ -66,6 +66,9 @@ gem 'washbullet'
 gem 'dotenv-rails'
 gem 'whenever', require: false
 
+# パスワード暗号化
+gem 'bcrypt', '~>3.1.7'
+
 # バルクインサート
 #gem 'activerecord-import'
 

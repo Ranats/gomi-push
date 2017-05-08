@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
 
   # 一意性(ユニーク) : uniqueness: true
   validates :name, uniqueness:true, presence:true
+  validates :title, presence:true
 #  validates_uniqueness_of :name
+
+  has_secure_password
 
 end
