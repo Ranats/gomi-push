@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :gomis, allow_destroy:true
 
   # 一意性(ユニーク) : uniqueness: true
-  validates :name, uniqueness:true
-  validates_uniqueness_of :name
+  validates :name, uniqueness:true, presence:true
+#  validates_uniqueness_of :name
 
 end

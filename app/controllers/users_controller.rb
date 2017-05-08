@@ -27,22 +27,31 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if User.all.size > 100
+    if User.all.size > 50
       respond_to do |format|
-      format.html { redirect_to users_url, notice: 'いっぱい(っ◞‸◟c)いっぱい' }
+      format.html { redirect_to users_path, flash[:alert] = "いっぱい(っ◞‸◟c)いっぱい" }
       format.json { head :no_content }
       end
     else
 
-    respond_to do |format|
+#      if User.find_by(name:params[:user][:name])
+#        flash[:alert] = "既に登録されているユーザー名です"
+#        @user = User.new
+#        puts "error"
+#        redirect_to users_path and return
+#      end
+
+      respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
+        format.json { render :login, status: :created, location: @user }
       else
-        format.html { render :new }
+        p @user.errors.full_messages
+        format.html { redirect_to users_path flash[:alert] = @user.errors.full_messages}
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
+      end
+
     end
   end
 
@@ -62,12 +71,6 @@ class UsersController < ApplicationController
 
   def login
     if params[:regist] == "登録"
-      if User.find_by(name:params[:user][:name])
-        flash[:alert] = "既に登録されているユーザー名です"
-        @user = User.new
-        puts "error"
-        redirect_to users_path and return
-      end
       create and return
     end
 
