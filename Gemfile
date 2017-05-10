@@ -69,6 +69,8 @@ gem 'whenever', require: false
 # パスワード暗号化
 gem 'bcrypt', '~>3.1.7'
 
+gem 'bootstrap_form'
+
 # バルクインサート
 #gem 'activerecord-import'
 

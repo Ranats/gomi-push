@@ -11,15 +11,19 @@
       <% end %>
     </div>
 <% end %>
-<p><font color="red"><%= flash[:alert] %></font></p>
-<%= form_for @user, :url => :login do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_field :password %>
 
-    <%= f.submit "ログイン" %>
+<div class="form_container">
+  <p><font color="red"><%= flash[:alert] %></font></p>
+  <%= bootstrap_form_for @user, :layout => :horizontal, :url => :login, label_col: "col-sm-2", control_col: "col-sm-10" do |f| %>
 
-    <%= submit_tag "登録" , name: "regist" %>
+        <%= f.text_field :name , label:"Name"%>
 
-<% end %>
+        <%= f.text_field :password, label:"Password"%>
 
+      <div class="col-sm-offset-4">
+            <%= f.submit "ログイン" , class: "btn btn-default col-sm-4"%>
+            <%= link_to "登録", new_user_path, class:"btn btn-default col-sm-4"%>
+      </div>
+  <% end %>
+</div>
 <br>
